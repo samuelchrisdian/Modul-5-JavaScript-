@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" dir-"ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queen</title>
+    <!--CSS-->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <!--Javascript-->
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.js"></script>
+    <script type="text/javascript">
+      var lagu = ["BohemianRhapsody.mp3","LoveOfMyLife.mp3","WeareTheChampions.mp3"];
+      var album = ["Queen1.jpg","Queen2.jpg","Queen3.jpg","Queen4.jpg"];
+      function FirstLoad(){
+        // untuk menampilkan list lagu dari array
+        var playlist = document.getElementById('playlist');
+
+        for (var i = 0; i <lagu.length; i++){
+          // membuat elemen background
+          var element = "";
+          element += "<li class='list-group-item'";
+          element += "onclick='Choose("+i+")'>"
+          element += lagu[i]+"</li>";
+          playlist.innerHTML += element;
+        }
+      }
+
+      function Choose(index){
+        // digunakan untuk memutar lagu yang dipilih
+        var audio = document.getElementById('audio');
+        audio.src=lagu[index];
+        audio.play();
+
+        var picture = document.getElementById('album');
+        picture.src = album[index];
+        picture.style.width = "100%";
+      }
+
+      function Play(){
+        var audio = document.getElementById('audio');
+        audio.play();
+      }
+      function Pause(){
+        var audio = document.getElementById('audio');
+        audio.pause();
+      }
+      function Stop(){
+        var audio = document.getElementById('audio');
+        audio.pause();
+        audio.currentTime=0;
+      }
+    </script>
+  </head>
+  <body onload="FirstLoad();">
+    <div class="container">
+      <div class="card col-sm-6">
+        <div class="card-header bg-info text-light">
+          <h4>Playlist Queen</h4>
+        </div>
+        <div class="card-body">
+          <!--ini tampilan gambar-->
+          <div class="col-sm-12">
+            <img src="" class="img" id="album">
+          </div>
+          <!--ini tampilan button control-->
+          <div class="btn-group col-sm-12">
+            <button type="button" class="col-sm-4 btn btn-warning" onclick="Pause();">Pause</button>
+            <button type="button" class="col-sm-4 btn btn-success" onclick="Play();">Play</button>
+            <button type="button" class="col-sm-4 btn btn-danger" onclick="Stop();">Stop</button>
+          </div>
+          <!--audio-->
+          <audio id="audio">
+
+          </audio>
+          <!--ini untuk list lagu-->
+          <div class="col-sm-12 list-group" id="playlist">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
